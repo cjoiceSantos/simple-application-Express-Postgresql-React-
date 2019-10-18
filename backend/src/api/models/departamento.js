@@ -13,11 +13,13 @@ class Departamento {
 
     async atualizarDepartamento(codigo, nome, gerente, iniciogerente){
         const dados = [`'${nome}'`, `''`,  `'${gerente}'`, `'${iniciogerente}'`]
-        await modelCrude.put('departamento', this.campos, dados, codigo)
+        const condition = ` ${this.campos[1]} = ${codigo}`
+        await modelCrude.put('departamento', this.campos, dados, condition)
     }
 
     async removerDepartamento(codigo){
-        await modelCrude.delete('departamento', this.campos[1], codigo)
+        const condition = ` ${this.campos[1]} = ${codigo}`
+        await modelCrude.delete('departamento', condition)
     }
 
     async listarDepartamento(){

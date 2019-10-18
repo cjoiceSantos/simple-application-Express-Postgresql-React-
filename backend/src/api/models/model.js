@@ -2,11 +2,7 @@ const pool = require('../../config/database')
 
 class Model{
    
-    constructor(table, campos, dados){
-        this.table = table;
-        this.campos = campos;
-        this.dados = dados ;
-    }
+    constructor(){}
 
     async post(table, campos, dados) {
         pool.connect((err, client, done) => {
@@ -19,7 +15,7 @@ class Model{
         return result
     }
 
-    async put(table, campos, dados, codigo){
+    async put(table, campos, dados, condition){
         pool.connect((err, client, done) => {
             if(err){
                 done();
@@ -39,13 +35,13 @@ class Model{
                 querysql += `, ${campos[i]} = ${dados[i]} `
             }
         }
-        querysql += ` WHERE codigo = ${codigo}`
+        querysql += ` WHERE ${condition}`
 
         const result = await pool.query(querysql)
         return result
     }
 
-    async delete(table, codigo, dado){
+    async delete(table,condition){
         pool.connect((err, client, done) => {
             if (err) {
                 done();
@@ -53,8 +49,8 @@ class Model{
             }
         });
 
-        console.log(`DELETE FROM ${table} WHERE ${codigo} = ${dado};`)
-        const result = await pool.query(`DELETE FROM ${table} WHERE ${codigo} = ${dado};`)
+        console.log(`DELETE FROM ${table} WHERE ${condition};`)
+        const result = await pool.query(`DELETE FROM ${table} WHERE ${condition};`)
         return result
     }
 
