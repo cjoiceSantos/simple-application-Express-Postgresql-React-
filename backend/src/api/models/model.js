@@ -26,7 +26,7 @@ class Model{
         var querysql =  `UPDATE ${table} SET `
         var params = 0;  
         for(var i=0; i<campos.length; i++){
-            if(dados[i] != "''"){
+            if(dados[i] != "''" && dados[i] != ""){
                 if(params == 0){
                     params++
                     querysql += `${campos[i]} = ${dados[i]} `
@@ -36,7 +36,7 @@ class Model{
             }
         }
         querysql += ` WHERE ${condition}`
-
+        console.log(querysql)
         const result = await pool.query(querysql)
         return result
     }
