@@ -1,12 +1,11 @@
-const dependente = require("../models/dependente")
+const projeto = require("../models/projeto")
 
 module.exports = {
-
     async post(req, res) {
-        const {empregado, nome, sexo, dtnascimento,parentesco} = req.body 
-       
+        const {descricao,codigo,local,departamento} = req.body 
+        
         try{
-            await dependente.inserirDependente({empregado, nome, sexo, dtnascimento,parentesco})
+            await  projeto.inserirProjeto({descricao,codigo,local,departamento})
             return res.status(200).json(req.body)
         }
         catch (err) {
@@ -17,11 +16,10 @@ module.exports = {
     },
 
     async put(req, res) {
-        const pk = req.params.nome
-        const {empregado, nome, sexo, dtnascimento,parentesco} = req.body
-    
+        const pk = req.params.id 
+        const {descricao,codigo,local,departamento} = req.body
         try{
-            await dependente.atualizarDependente (pk, {empregado, nome, sexo, dtnascimento,parentesco})
+            await  projeto.atualizarProjeto(pk, {descricao,codigo,local,departamento})
             return res.status(200).json(req.body)
         }
         catch (err) {
@@ -32,9 +30,9 @@ module.exports = {
     },
 
     async delete(req, res){
-        const nome = req.params.nome
+        const pk = req.params.id
         try{
-            await dependente.removerDependente(nome)
+            await projeto.removerProjeto(pk)
             return res.status(200).json(req.body)
         }
         catch (err) {
@@ -46,7 +44,7 @@ module.exports = {
 
     async get(req, res){
         try{
-            const result = await dependente.listarDependente()
+            const result = await projeto.listarProjeto()
             return res.status(200).json(result)
         }
         catch (err) {

@@ -1,12 +1,12 @@
-const dependente = require("../models/dependente")
+const trabalhaem = require("../models/trabalhaem")
 
 module.exports = {
 
     async post(req, res) {
-        const {empregado, nome, sexo, dtnascimento,parentesco} = req.body 
-       
+        const {empregado,projeto,horas} = req.body 
+        
         try{
-            await dependente.inserirDependente({empregado, nome, sexo, dtnascimento,parentesco})
+            await  trabalhaem.inserirTrabalhaem({empregado,projeto,horas})
             return res.status(200).json(req.body)
         }
         catch (err) {
@@ -17,11 +17,11 @@ module.exports = {
     },
 
     async put(req, res) {
-        const pk = req.params.nome
-        const {empregado, nome, sexo, dtnascimento,parentesco} = req.body
-    
+        const pkEmpregado = req.params.empregado
+        const pkProjeto = req.params.projeto
+        const {empregado,projeto,horas} = req.body
         try{
-            await dependente.atualizarDependente (pk, {empregado, nome, sexo, dtnascimento,parentesco})
+            await  trabalhaem.atualizarTrabalhaem(pkEmpregado, pkProjeto, {empregado,projeto,horas})
             return res.status(200).json(req.body)
         }
         catch (err) {
@@ -32,9 +32,11 @@ module.exports = {
     },
 
     async delete(req, res){
-        const nome = req.params.nome
+        const pkEmpregado = req.params.empregado
+        const pkProjeto = req.params.projeto
+       
         try{
-            await dependente.removerDependente(nome)
+            await trabalhaem.removerTrabalhaem(pkEmpregado, pkProjeto)
             return res.status(200).json(req.body)
         }
         catch (err) {
@@ -46,7 +48,7 @@ module.exports = {
 
     async get(req, res){
         try{
-            const result = await dependente.listarDependente()
+            const result = await trabalhaem.listarTrabalhaem()
             return res.status(200).json(result)
         }
         catch (err) {

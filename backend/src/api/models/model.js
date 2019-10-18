@@ -36,7 +36,6 @@ class Model{
             }
         }
         querysql += ` WHERE ${condition}`
-        console.log(querysql)
         const result = await pool.query(querysql)
         return result
     }
@@ -48,8 +47,6 @@ class Model{
                 throw err;
             }
         });
-
-        console.log(`DELETE FROM ${table} WHERE ${condition};`)
         const result = await pool.query(`DELETE FROM ${table} WHERE ${condition};`)
         return result
     }

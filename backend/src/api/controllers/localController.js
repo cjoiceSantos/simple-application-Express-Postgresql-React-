@@ -1,12 +1,10 @@
-const dependente = require("../models/dependente")
+const local = require("../models/local")
 
 module.exports = {
-
     async post(req, res) {
-        const {empregado, nome, sexo, dtnascimento,parentesco} = req.body 
-       
+        const {departamento, nome} = req.body 
         try{
-            await dependente.inserirDependente({empregado, nome, sexo, dtnascimento,parentesco})
+            await  local.inserirLocal({departamento, nome})
             return res.status(200).json(req.body)
         }
         catch (err) {
@@ -17,11 +15,10 @@ module.exports = {
     },
 
     async put(req, res) {
-        const pk = req.params.nome
-        const {empregado, nome, sexo, dtnascimento,parentesco} = req.body
-    
+        const pk = req.params.nome 
+        const {departamento, nome} = req.body
         try{
-            await dependente.atualizarDependente (pk, {empregado, nome, sexo, dtnascimento,parentesco})
+            await  local.atualizarLocal(pk, {departamento, nome})
             return res.status(200).json(req.body)
         }
         catch (err) {
@@ -34,7 +31,7 @@ module.exports = {
     async delete(req, res){
         const nome = req.params.nome
         try{
-            await dependente.removerDependente(nome)
+            await local.removerLocal(nome)
             return res.status(200).json(req.body)
         }
         catch (err) {
@@ -46,7 +43,7 @@ module.exports = {
 
     async get(req, res){
         try{
-            const result = await dependente.listarDependente()
+            const result = await local.listarLocal()
             return res.status(200).json(result)
         }
         catch (err) {
