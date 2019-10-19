@@ -7,6 +7,7 @@ const empregadoController = require("../api/controllers/empregadoController")
 const localController = require("../api/controllers/localController")
 const projetoController = require("../api/controllers/projetoController")
 const trabalhaemController = require("../api/controllers/trabalhaemController")
+const relatoriosController = require("../api/controllers/relatoriosController")
 
 //Routes table Departamento
 router.post('/departamento', departamentoController.post)
@@ -43,5 +44,13 @@ router.post('/trabalhaem', trabalhaemController.post)
 router.put('/trabalhaem/:empregado/:projeto', trabalhaemController.put)
 router.delete('/trabalhaem/:empregado/:projeto', trabalhaemController.delete)
 router.get('/trabalhaem/', trabalhaemController.get)
+
+//Routes relatorios
+router.get('/relatorio/r1', relatoriosController.empregadoPorEndereco)
+router.get('/relatorio/r2', relatoriosController.projetoPorDepartamento)
+router.get('/relatorio/r3', relatoriosController.departamentoPorLocal)
+router.get('/relatorio/r4', relatoriosController.dependentesPorIdade)
+router.get('/relatorio/r5', relatoriosController.AVGDepenPorEmpre)
+router.get('/relatorio/r6', relatoriosController.departamentoQtdProjetos)
 
 module.exports = router

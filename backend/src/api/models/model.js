@@ -51,7 +51,6 @@ class Model{
         return result
     }
 
-
     async get(table) {
         pool.connect((err, client, done) => {
             if (err) {
