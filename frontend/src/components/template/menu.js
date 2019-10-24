@@ -4,27 +4,30 @@ import React from 'react'
 export default props => (
     <aside className='menu-area'> 
         <nav className="menu"> 
+            <a href="#/home">
+                <i className="fa fa-home">      Início </i> 
+            </a>
             <a href="#/empregado">
-                <i className="fa fa-empregado"></i> Empregado
+                <i className="fa fa-id-badge">  Empregado </i>  
             </a>
             <a href="#/departamento">
-                <i className="fa fa-departamento"></i> Departamento
+                <i className="fa fa-briefcase"> Departamento </i> 
             </a>
             <a href="#/dependente">
-                <i className="fa fa-dependente"></i> Depedente
+                <i className="fa fa-child"> Dependente</i> 
             </a>
             <a href="#/projeto">
-                <i className="fa fa-projeto"></i> Projeto
+                <i className="fa fa-tasks"> Projeto</i> 
             </a>
             <a href="#/local">
-                <i className="fa fa-local"></i> Local
+                <i className="fa fa-map-o "> Local</i> 
             </a>
             <a href="#/trabalhaem">
-                <i className="fa fa-trabalhaem"></i> TrabalhaEm
+                <i className="fa fa-suitcase"> TrabalhaEm</i> 
             </a>
 
             <a href="#/relatorios">
-                <i className="fa fa-trabalhaem"></i> RELATÓRIOS
+                <i className="fa fa-bar-chart"> RELATÓRIOS</i> 
             </a>
         </nav>
     </aside>

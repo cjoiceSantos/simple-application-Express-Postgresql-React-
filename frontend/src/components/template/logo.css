@@ -5,7 +5,7 @@ aside.logo {
     align-items: center;
 }
 
-aside.logo img {
+i {
     padding: 0px 15px;
-    width: 70%;
+    width: 100%;
 }

@@ -1,7 +1,7 @@
 :root {
-  --bg-dark: rgb(189, 223, 245);
-  --header-height: 100px;
-  --aside-width: 150px;
+  --bg-dark: #008080;
+  --header-height: 90px;
+  --aside-width: 180px;
   --footer-height: 40px;
   --shadow: 0 2px 23px 0 rgba(0,0,0,0.1), 0 2px 49px 0 rgba(0,0,0,0.06);
 }
@@ -9,6 +9,10 @@
 * {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+}
+
+.fa { 
+  font-family: FontAwesome;
 }
 
 .table {

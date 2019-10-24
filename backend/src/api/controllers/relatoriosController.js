@@ -3,9 +3,10 @@ const relatorio = require("../models/relatorios")
 module.exports = {
 
     async empregadoPorEndereco(req, res) {
-        const {endereco,sexo,nome,sobrenome} = req.query 
+        const {endereco,sexo,nome,sobrenome} = req.query
+        console.log({endereco,sexo,nome,sobrenome} ) 
         try{
-            const result = await relatorio.getEmpregadoPorEndereco(endereco[0],sexo[0],nome[0],sobrenome[0])
+            const result = await relatorio.getEmpregadoPorEndereco(endereco,sexo,nome,sobrenome)
             return res.status(200).json(result)
         }
         catch (err) {
@@ -19,7 +20,7 @@ module.exports = {
         const {departamento,local} = req.query
          
         try{
-            const result = await relatorio.getProjetoPorDepartamento(departamento[0],local[0])
+            const result = await relatorio.getProjetoPorDepartamento(departamento,local)
             return res.status(200).json(result)
         }
         catch (err) {
@@ -31,8 +32,9 @@ module.exports = {
 
     async departamentoPorLocal(req, res) {
         const {departamento,local} = req.query 
+       
         try{
-            const result = await relatorio.getDepartamentoPorLocal(departamento[0],local[0])
+            const result = await relatorio.getDepartamentoPorLocal(departamento,local)
             return res.status(200).json(result)
         }
         catch (err) {
@@ -45,7 +47,7 @@ module.exports = {
     async dependentesPorIdade(req, res) {
         const {sexoEmpregado,sexoDependente,idadeMinima} = req.query 
         try{
-            const result = await relatorio.getDependentesPorIdade(sexoEmpregado[0],sexoDependente[0],idadeMinima[0])
+            const result = await relatorio.getDependentesPorIdade(sexoEmpregado,sexoDependente,idadeMinima)
             return res.status(200).json(result)
         }
         catch (err) {
@@ -70,7 +72,7 @@ module.exports = {
     async departamentoQtdProjetos(req, res) {
         const {quantidadeMaximaProjetos} = req.query 
         try{
-            const result = await relatorio.getDepartamentoQtdProjetos(quantidadeMaximaProjetos[0])
+            const result = await relatorio.getDepartamentoQtdProjetos(quantidadeMaximaProjetos)
             return res.status(200).json(result)
         }
         catch (err) {

@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 import Main from "../template/main"
 
 const headerProps = {
-    icon: 'users',
+    icon: 'briefcase',
     title: 'Table Departamento',
 }
 
@@ -13,13 +14,16 @@ const baseUrl = 'http://localhost:3003/departamento'
 
 const inicioState = {
     departamento: { 
-        "nome": "", 
-	    "codigo": "", 
-	    "gerente": "", 
-	    "iniciogerente": ""
+        nome: "", 
+	    codigo: "", 
+	    gerente: "", 
+	    iniciogerente: ""
     },
     list: [],
     mostrarForm: false,
+    nameButton: 'inserir',
+    notify: '',
+    disabledButton: false,
     pkDepartamento: null
 }
 
@@ -27,23 +31,25 @@ export default class Departamento extends Component {
     state = {...inicioState}
     
     clear(){
-        this.setState({departamento: inicioState})
+        this.setState({departamento: inicioState, nameButton: 'inserir', mostrarForm: false, disabledButton: false})
     }
 
     save(){
         const departamento = this.state.departamento
-        console.log(departamento)
 
         const method = this.state.pkDepartamento ? 'put' : 'post'
-        console.log(method)
         const url = this.state.pkDepartamento ? `${baseUrl}/${this.state.pkDepartamento}` : baseUrl
         
 
         axios[method](url, departamento)
             .then(resp => {
-                this.refresh()
+                this.refresh() 
                 this.setState({ departamento: inicioState.departamento})
+                this.setState({disabledButton: false})
+                toast(resp.data)
         })
+            .catch(error => {toast(error.Response)})
+       
 
     }
 
@@ -68,14 +74,15 @@ export default class Departamento extends Component {
     }
 
     preencherForn(e){
-        this.setState({departamento: e, mostrarForm: true, pkDepartamento: e.codigo})
-    
+        this.setState({departamento: e, mostrarForm: true, pkDepartamento: e.codigo, nameButton: 'atualizar', disabledButton: true})
     }
 
     deleteDep(e){
         axios['delete'](`${baseUrl}/${e.codigo}`)
-        .then( resp => this.refresh())
-        .catch(resp => toast(resp.msg));
+        .then(resp => {this.refresh() 
+                        toast(resp.data)
+                    }) 
+        .catch(error => {toast(error.Response)});
     }
 
     componentDidMount(){
@@ -96,11 +103,14 @@ export default class Departamento extends Component {
                     </div>
                     <div className="col-12 col-md-6"> 
                         <label> Código </label>
-                        <input type="text" className="form-control" 
+                        <input type="text" className="form-control" id='cod'
                                 name="codigo" 
                                 value={this.state.departamento.codigo} 
                                 onChange={ e => this.updateField(e)}
-                                placeholder = "Código"/>
+                                placeholder = "Código"
+                                disabled = {this.state.disabledButton}
+                        
+                        />
                     </div>
                     <div className="col-12 col-md-6"> 
                         <label> Gerente </label>
@@ -123,7 +133,7 @@ export default class Departamento extends Component {
                 <div className="row">
                     <div className="col12 d-flex justify-content-end">
                         <button className="btn btn-primary" onClick= { e => this.save(e)}> salvar </button>
-                        <button className="btn btn-secondary ml-2" onClick={e=>this.clear(e)}> Cancelar </button>
+                        <button className="btn btn-secondary ml-2" onClick={()=>this.clear()}> Cancelar </button>
                     </div>
                 </div>
             </div>
@@ -149,8 +159,8 @@ export default class Departamento extends Component {
                             <td> {e.gerente} </td>
                             <td> {e.iniciogerente} </td>
                             <td> 
-                                <button onClick= {() => { this.preencherForn(e)}} > Editar </button>
-                                <button onClick = {() => { this.deleteDep(e)}}>  Remover </button>
+                                <button onClick= {() => { this.preencherForn(e)}} >  <i className='fa fa-pencil-square-o '></i> </button>
+                                <button onClick = {() => { this.deleteDep(e)}}>  <i className='fa  fa-times'></i> </button>
                             </td>
                          </tr>
                     ) )}
@@ -162,7 +172,9 @@ export default class Departamento extends Component {
     render() {
         return ( 
             <Main {...headerProps}> 
-                <button className="btn btn-primary" onClick={ () => { this.setState({mostrarForm: !this.state.mostrarForm})} }> Inserir </button>
+                <button className="btn btn-primary" onClick={ () => { this.setState({mostrarForm: !this.state.mostrarForm})} }> 
+                    {this.state.nameButton}
+                </button>
                 <hr/>
                 {this.state.mostrarForm ? this.renderForm() : null }
                 {this.renderTable()}
