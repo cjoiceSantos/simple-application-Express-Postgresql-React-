@@ -36,6 +36,7 @@ class Model{
             }
         }
         querysql += ` WHERE ${condition}`
+        console.log(querysql)
         const result = await pool.query(querysql)
         return result
     }

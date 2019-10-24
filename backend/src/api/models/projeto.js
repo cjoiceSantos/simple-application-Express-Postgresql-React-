@@ -11,8 +11,8 @@ class Projeto {
         await modelCrude.post('projeto', this.campos, dados)
     }
 
-    async atualizarProjeto(pk, {descricao,codigo,local,departamento}){
-        const dados = [`'${descricao}'`,`${codigo}`, `'${local}'`, `'${departamento}'`]
+    async atualizarProjeto(pk, {descricao,local,departamento}){
+        const dados = [`'${descricao}'`,`''`, `'${local}'`, `'${departamento}'`]
         const condition = `${this.campos[1]} = ${pk}`
         await modelCrude.put('projeto', this.campos, dados, condition)
     }

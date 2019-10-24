@@ -11,8 +11,8 @@ class Trabalhaem {
         await modelCrude.post('trabalhaem', this.campos, dados)
     }
 
-    async atualizarTrabalhaem(pkEmpregado, pkProjeto, {empregado,projeto,horas}){
-        const dados = [`'${empregado}'`,`${projeto}`,`${horas}`]
+    async atualizarTrabalhaem(pkEmpregado, pkProjeto, {horas}){
+        const dados = [`''`,`''`,`${horas}`]
         const condition = `${this.campos[0]} = '${pkEmpregado}' AND ${this.campos[1]} = '${pkProjeto}'`
         await modelCrude.put('trabalhaem', this.campos, dados, condition)
     }

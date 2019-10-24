@@ -7,7 +7,7 @@ module.exports = {
        
         try{
             await departamento.inserirDepartamento({nome, codigo, gerente, iniciogerente})
-            return res.status(200).json(req.body)
+            return res.status(200).json("Departamento adicionado.")
         }
         catch (err) {
             return res.status(400).json({
@@ -22,7 +22,7 @@ module.exports = {
     
         try{
             await departamento.atualizarDepartamento(codigo, nome, gerente, iniciogerente)
-            return res.status(200).json(req.body)
+            return res.status(200).json("Departamento atualizado.")
         }
         catch (err) {
             return res.status(400).json({
@@ -35,7 +35,7 @@ module.exports = {
         const id = req.params.id
         try{
             await departamento.removerDepartamento(id)
-            return res.status(200).json(req.body)
+            return res.status(200).json("Departamento removido.")
         }
         catch (err) {
             return res.status(400).json({

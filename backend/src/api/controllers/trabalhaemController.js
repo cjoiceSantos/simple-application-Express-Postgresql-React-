@@ -7,7 +7,7 @@ module.exports = {
         
         try{
             await  trabalhaem.inserirTrabalhaem({empregado,projeto,horas})
-            return res.status(200).json(req.body)
+            return res.status(200).json("Empregado foi cadastrado no projeto")
         }
         catch (err) {
             return res.status(400).json({
@@ -19,10 +19,10 @@ module.exports = {
     async put(req, res) {
         const pkEmpregado = req.params.empregado
         const pkProjeto = req.params.projeto
-        const {empregado,projeto,horas} = req.body
+        const horas = req.body
         try{
-            await  trabalhaem.atualizarTrabalhaem(pkEmpregado, pkProjeto, {empregado,projeto,horas})
-            return res.status(200).json(req.body)
+            await  trabalhaem.atualizarTrabalhaem(pkEmpregado, pkProjeto, horas)
+            return res.status(200).json("Atualizado com sucesso.")
         }
         catch (err) {
             return res.status(400).json({
@@ -37,7 +37,7 @@ module.exports = {
        
         try{
             await trabalhaem.removerTrabalhaem(pkEmpregado, pkProjeto)
-            return res.status(200).json(req.body)
+            return res.status(200).json("Removido com sucesso")
         }
         catch (err) {
             return res.status(400).json({

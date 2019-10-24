@@ -5,7 +5,7 @@ module.exports = {
         const {nome,nomedomeio,sobrenome, codigo, dtnascimento,endereco,sexo,salario,gerente,departamento} = req.body 
         try{
             await  empregado.inserirempregado({nome,nomedomeio,sobrenome, codigo, dtnascimento,endereco,sexo,salario,gerente,departamento})
-            return res.status(200).json(req.body)
+            return res.status(200).json("Empregado inserido")
         }
         catch (err) {
             return res.status(400).json({
@@ -20,7 +20,7 @@ module.exports = {
     
         try{
             await  empregado.atualizarempregado(id, {nome,nomedomeio,sobrenome, dtnascimento,endereco,sexo,salario,gerente,departamento})
-            return res.status(200).json(req.body)
+        return res.status(200).json("Empregado atualizado")
         }
         catch (err) {
             return res.status(400).json({
@@ -33,7 +33,7 @@ module.exports = {
         const id = req.params.id
         try{
             await empregado.removerempregado(id)
-            return res.status(200).json(req.body)
+            return res.status(200).json("Empregado removido." )
         }
         catch (err) {
             return res.status(400).json({

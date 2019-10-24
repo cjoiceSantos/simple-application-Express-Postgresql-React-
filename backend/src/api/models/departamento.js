@@ -18,7 +18,7 @@ class Departamento {
     }
 
     async removerDepartamento(codigo){
-        const condition = ` ${this.campos[1]} = ${codigo}`
+        const condition = `${this.campos[1]} = ${codigo}`
         await modelCrude.delete('departamento', condition)
     }
 

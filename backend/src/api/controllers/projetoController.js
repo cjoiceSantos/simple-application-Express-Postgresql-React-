@@ -6,7 +6,7 @@ module.exports = {
         
         try{
             await  projeto.inserirProjeto({descricao,codigo,local,departamento})
-            return res.status(200).json(req.body)
+            return res.status(200).json("Projeto inserido.")
         }
         catch (err) {
             return res.status(400).json({
@@ -17,10 +17,10 @@ module.exports = {
 
     async put(req, res) {
         const pk = req.params.id 
-        const {descricao,codigo,local,departamento} = req.body
+        const {descricao,local,departamento} = req.body
         try{
-            await  projeto.atualizarProjeto(pk, {descricao,codigo,local,departamento})
-            return res.status(200).json(req.body)
+            await  projeto.atualizarProjeto(pk, {descricao,local,departamento})
+            return res.status(200).json("Projeto atualizado.")
         }
         catch (err) {
             return res.status(400).json({
@@ -33,7 +33,7 @@ module.exports = {
         const pk = req.params.id
         try{
             await projeto.removerProjeto(pk)
-            return res.status(200).json(req.body)
+            return res.status(200).json("Projeto removido.")
         }
         catch (err) {
             return res.status(400).json({

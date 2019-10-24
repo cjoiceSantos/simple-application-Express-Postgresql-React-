@@ -7,7 +7,7 @@ module.exports = {
        
         try{
             await dependente.inserirDependente({empregado, nome, sexo, dtnascimento,parentesco})
-            return res.status(200).json(req.body)
+            return res.status(200).json("Dependente inserido")
         }
         catch (err) {
             return res.status(400).json({
@@ -18,11 +18,11 @@ module.exports = {
 
     async put(req, res) {
         const pk = req.params.nome
-        const {empregado, nome, sexo, dtnascimento,parentesco} = req.body
+        const {empregado, sexo, dtnascimento,parentesco} = req.body
     
         try{
-            await dependente.atualizarDependente (pk, {empregado, nome, sexo, dtnascimento,parentesco})
-            return res.status(200).json(req.body)
+            await dependente.atualizarDependente (pk, {empregado, sexo, dtnascimento,parentesco})
+            return res.status(200).json("Dependente atualizado")
         }
         catch (err) {
             return res.status(400).json({
@@ -35,7 +35,7 @@ module.exports = {
         const nome = req.params.nome
         try{
             await dependente.removerDependente(nome)
-            return res.status(200).json(req.body)
+            return res.status(200).json("Dependente removido")
         }
         catch (err) {
             return res.status(400).json({

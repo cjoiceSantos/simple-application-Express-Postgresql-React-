@@ -11,8 +11,8 @@ class Dependente {
         await modelCrude.post('dependente', this.campos, dados)
     }
 
-    async atualizarDependente(pk,{empregado,nome, sexo, dtnascimento,parentesco}){
-        const dados = [ `'${empregado}'`, `'${nome}'`, `'${sexo}'`, `'${dtnascimento}'`, `'${parentesco}'`]
+    async atualizarDependente(pk,{empregado, sexo, dtnascimento,parentesco}){
+        const dados = [ `'${empregado}'`, `''`, `'${sexo}'`, `'${dtnascimento}'`, `'${parentesco}'`]
         const condition = ` ${this.campos[1]} = ${pk}`
         await modelCrude.put('dependente', this.campos, dados, condition)
     }

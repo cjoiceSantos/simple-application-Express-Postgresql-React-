@@ -5,7 +5,7 @@ module.exports = {
         const {departamento, nome} = req.body 
         try{
             await  local.inserirLocal({departamento, nome})
-            return res.status(200).json(req.body)
+            return res.status(200).json("Local inserido.")
         }
         catch (err) {
             return res.status(400).json({
@@ -19,7 +19,7 @@ module.exports = {
         const {departamento, nome} = req.body
         try{
             await  local.atualizarLocal(pk, {departamento, nome})
-            return res.status(200).json(req.body)
+            return res.status(200).json("Local atualizado.")
         }
         catch (err) {
             return res.status(400).json({
@@ -32,7 +32,7 @@ module.exports = {
         const nome = req.params.nome
         try{
             await local.removerLocal(nome)
-            return res.status(200).json(req.body)
+            return res.status(200).json("Local removido.")
         }
         catch (err) {
             return res.status(400).json({
