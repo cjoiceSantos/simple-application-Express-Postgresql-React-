@@ -3,8 +3,7 @@ const relatorio = require("../models/relatorios")
 module.exports = {
 
     async empregadoPorEndereco(req, res) {
-        const {endereco,sexo,nome,sobrenome} = req.query
-        console.log({endereco,sexo,nome,sobrenome} ) 
+        const {endereco,sexo,nome,sobrenome} = req.query 
         try{
             const result = await relatorio.getEmpregadoPorEndereco(endereco,sexo,nome,sobrenome)
             return res.status(200).json(result)

@@ -10,6 +10,10 @@ class Relatorios{
                 throw err;
             }
         });
+
+        console.log(`SELECT * FROM empregado WHERE endereco ILIKE '%${endereco || ''}%' 
+        AND sexo='${sexo || ''}' AND sobrenome ILIKE '%${sobrenome || ''}%' AND nome ILIKE '%${nome || ''}%' order by nome`)
+
         const result = await pool.query(`SELECT * FROM empregado WHERE endereco ILIKE '%${endereco || ''}%' 
             AND sexo='${sexo || ''}' AND sobrenome ILIKE '%${sobrenome || ''}%' AND nome ILIKE '%${nome || ''}%' order by nome`)
         return result.rows
